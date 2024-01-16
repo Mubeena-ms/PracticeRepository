@@ -82,4 +82,43 @@ select emp_no,emp_lname from Employee where emp_fname like '%t%t%'
 
 --8. Get the employee numbers and first names of all employees 	--whose last names have a letter o or a as the second character and end with the letters es.select emp_no,emp_fname from Employee where emp_lname like '_[o,a]%es'--9. Get the employee numbers of all employees whose departments are located in Seattle.select e.emp_no,d.[location] from Employee e inner join Department d on e.dept_no=d.Dept_no where d.[location]='Seattle'--10. Find the last and first names of all employess who entered their projects on 04.01.1998select e.emp_fname,e.emp_lname from Employee e inner join Works_on w on w.emp_no=e.emp_no where w.enter_date='1998.01.04'--11. Group all departments using their locations.
 select location,Dept_name from Department group by location, dept_name
- --12. Find the biggest employee number.select MAX(emp_no) from Employee--13. Get the jobs that are done by more than two employees.select job from Works_on group by job having COUNT(*)>2 --14. Find the employee numbers of all employees who are clerks or work for department d3.select w.emp_no from Works_on w where w.Job='Clerk' or exists (SELECT e.dept_no FROM Employee e where e.emp_no=w.emp_no and e.dept_no='d3' )
+ --12. Find the biggest employee number.select MAX(emp_no) from Employee--13. Get the jobs that are done by more than two employees.select job from Works_on group by job having COUNT(*)>2 --14. Find the employee numbers of all employees who are clerks or work for department d3.select w.emp_no from Works_on w where w.Job='Clerk' or exists (SELECT e.dept_no FROM Employee e where e.emp_no=w.emp_no and e.dept_no='d3' )-- JoinSELECT e.Emp_no FROM Employee e JOIN Department d ON e.Dept_no = d.Dept_no WHERE d.Dept_name = 'Marketing'
+ 
+--correlated
+select * from Department
+select * from Employee
+ 
+SELECT emp_no FROM Employee WHERE Dept_no IN ( SELECT Dept_no FROM Department d WHERE d.dept_name = 'Marketing')
+ 
+ 
+--Insert the data of a new employee called Julia Long, whose employee number is 1111. Her department number is not known yet.
+INSERT INTO Employee (emp_no, emp_fname, emp_lname) VALUES (1111, 'Julia', 'Long');
+  
+--Modify the job of all the employees in project p1 who are managers. They have to work as clerks from now on. 
+UPDATE Works_on SET Job = 'Clerk' WHERE project_no = 'p1' AND Job = 'Manager';
+ 
+ 
+--The budgets of all projects are no longer determined. Assign all budgets the NULL value.
+UPDATE project SET Budget = NULL;
+ 
+--Increase the budget of the project where the manager has the employee number 10102. The increase is 10%. 
+UPDATE Project SET Budget = Budget * 1.1 WHERE project_no IN (SELECT project_no FROM Works_on WHERE emp_no = 10102 AND Job = 'Manager');
+ 
+--Change the enter date for the projects for those employees who work in project p1 and belong to the department Sales. The new date is 12.12.1998. 
+UPDATE Works_on SET enter_date = '1998-12-12' WHERE project_no = 'p1' AND emp_no IN (SELECT emp_no FROM Employee WHERE Dept_no = 'Sales');
+
+--Create a stored procedure to insert data into department and Employee table.
+CREATE PROCEDURE sp_InsertDepartmentAndEmployee
+@dept_name NVARCHAR(255),
+@Location NVARCHAR(255),
+@EmployeeName NVARCHAR(255),
+@EmployeePosition NVARCHAR(255) 
+AS BEGIN 
+-- Insert into the department table
+INSERT INTO department (dept_name, Location) VALUES (@dept_name, @Location); 
+-- Get the department ID of the newly inserted record
+DECLARE @DepartmentID INT; 
+SET @DepartmentID = SCOPE_IDENTITY(); 
+-- Insert into the employee table with the corresponding department ID 
+INSERT INTO employee (emp_fname, dept_no) VALUES (@EmployeeName, @DepartmentID);
+END;

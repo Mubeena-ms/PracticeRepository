@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\HandsOnEfDemo2.props" />
+</Project>

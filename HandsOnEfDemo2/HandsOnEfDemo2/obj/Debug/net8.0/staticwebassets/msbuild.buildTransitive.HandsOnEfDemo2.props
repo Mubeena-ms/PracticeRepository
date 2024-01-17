@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\HandsOnEfDemo2.props" />
-</Project>

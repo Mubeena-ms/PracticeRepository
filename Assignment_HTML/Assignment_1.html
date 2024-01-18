@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4>Fields marked(*) are required</h4>
+    <fieldset>
+        <legend>Input Text Field Validation</legend>
+        <table>
+            <tr>
+                <th>First Name * </th>
+                <td><input type="text" placeholder="First Name" required> </td>
+            </tr>
+            <tr>
+                <th>Last Name * </th>
+                <td><input type="text" placeholder="Last Name" required> </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Email and URL Validation</legend>
+        <table>
+            <tr>
+                <th>Email * </th>
+                <td><input type="email" placeholder="e.g.swapnil@example.com" required> </td>
+            </tr>
+            <tr>
+                <th>Website * </th>
+                <td><input type="url" placeholder="e.g.http://www.html5andcss3.org" required> </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Mobile or Phone Number Validation</legend>
+        <table>
+            <tr>
+                <th>Mobile * </th>
+                <td><input type="number" placeholder="Please enter a ten digit phone number" required> </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Drop Down Box Validation</legend>
+        <table>
+            <tr>
+                <th>Country</th>
+                <td><select>
+                    <option>India</option>
+                    <option>China</option>
+                    <option>Japan</option>
+                    <option>USA</option>
+                    <option>UK</option>
+                    <option>France</option>
+                </select> </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Number Validation With Specific Range</legend>
+        <table>
+            <tr>
+                <th>Post code * </th>
+                <td><input type="number" required> </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Textarea Validation</legend>
+        <table>
+            <tr>
+                <th>Address * </th>
+                <td><textarea name="" id="" cols="30" rows="3"></textarea></td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>CheckBox and Radio Button Validation</legend>
+        <table>
+            <tr>
+                <th>Agree to T & C * </th>
+                <td><input type="checkbox"> </td>
+            </tr>
+            <tr>
+                <th>Gender * </th>
+                <td><input type="radio" name="r1">Male</td>
+                <td><input type="radio" name="r1">Female</td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Password Validation Using Pattern</legend>
+        <table>
+            <tr>
+                <th>Password * </th>
+                <td><input type="text" required> </td>
+            </tr>
+        </table>
+    </fieldset>
+    <button>Sign up</button>
+</body>
+</html>
